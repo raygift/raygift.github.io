@@ -6,7 +6,7 @@ permalink: ':title/'
 baseurl: "/" 
 
 # Comments
-discus_identifier: mr-brown
+discus_identifier: ray
 
 # Social settings
 twitter_url: https://twitter.com/artemsheludko_
