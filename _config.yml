@@ -2,7 +2,8 @@ title: Mr.Brown
 description: Mr.Brown is a responsive jekyll theme
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: ':title/'
-baseurl: "/mr-brown" # the subpath of your site, e.g. /blog
+#baseurl: "/mr-brown" # the subpath of your site, e.g. /blog
+baseurl: "https://raygift.github.io/" 
 
 # Comments
 discus_identifier: mr-brown
