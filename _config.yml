@@ -3,7 +3,7 @@ description: Mr.Brown is a responsive jekyll theme
 url: "https://raygift.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 permalink: ':title/'
 #baseurl: "/mr-brown" # the subpath of your site, e.g. /blog
-baseurl: "/" 
+baseurl: "https://raygift.github.io" 
 
 # Comments
 discus_identifier: ray
