@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-{% include head.html %}
-<body>
-  {% include header.html %}
-  <div class="page-wrap">
-    <main role="main">
-      <div class="page-container">
-        {% if page.img %}
-         <img class="page-img" src={{ "/assets/images/" | prepend: site.baseurl | append : page.img}} alt="{{page.title}}">
-        {% endif %}
-        <div class="page-content">
-          <article>
-            <h1 class="page-title">{{page.title}}</h1>
-            {% if page.author %}
-            <div class="date-byline"><span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{page.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;&nbsp;</span><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{page.author}}</span></div>
-            {% endif %}
-            {{page.content | markdownify}}
-          </article>
-          {% include share.html %}
-          {% include disqus.html %}
-        </div>
-      </div>
-    </main>
+---
+layout: default
+---
+<article class="post container">
+  <div class="post-meta">
+    <span class="post-meta-span date">{{ page.date | date:"%Y %B %d" }}</span>
+    {% if page.tags.size > 0 %}
+    <span class="post-meta-span tag">{{ page.tags | join: ', ' }}</span>
+    {% endif %}
   </div>
-  {% include footer.html %}
-{% include javascripts.html %}
-</body>
-</html>
+
+  <h1 class="post-title">{{ page.title }}</h1>
+  {{ content }}
+</article>
+
+<div class="post-share">
+  <div class="container">
+    <a href="https://twitter.com/share?url={{ page.url | prepend: site.baseurl | prepend: site.url }}&text={{ page.title }}" target="_blank" class="post-share-icon twitter"></a>
+    <a href="https://www.evernote.com/clip.action?url={{ page.url | prepend: site.baseurl | prepend: site.url }}&title={{ page.title }}" target="_blank" class="post-share-icon evernote"></a>
+    <a href="http://service.weibo.com/share/share.php?url={{ page.url | prepend: site.baseurl | prepend: site.url }}&title={{ page.title }}" target="_blank" class="post-share-icon weibo"></a>
+  </div>
+</div>
+
+{% if site.disqus.shortname %}
+<div class="comment container">
+  <div id="disqus_thread">
+  </div>
+</div>
+{% endif %}

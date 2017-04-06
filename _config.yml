@@ -1,16 +1,50 @@
-title: Mr.Brown
-description: Mr.Brown is a responsive jekyll theme
-url: "https://raygift.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-permalink: ':title/'
-#baseurl: "/mr-brown" # the subpath of your site, e.g. /blog
-baseurl: "https://raygift.github.io" 
+# Site settings
+title: 往来没白丁
+email: the_bigticket@outlook.com
+description: > # this means to ignore newlines until "baseurl:"
+  
+baseurl: "https://raygift.github.io" # the subpath of your site, e.g. /blog/
+url: https://raygift.github.io # the base hostname & protocol for your site
+rss_url: /pages/feed.xml
+author: raygift
 
-# Comments
-discus_identifier: ray
+# Sidebar filter
+# Choose 'tag' or 'category' as filter in sidebar.
+filter: 'category'
+recent_num: 20
 
-# Social settings
-twitter_url: https://twitter.com/artemsheludko_
-facebook_url: https://facebook.com/
-googleplus_url: https://plus.google.com/
-instagram_url: https://instagram.com
-github_url: https://github.com/artemsheludko/
+# Social account
+#twitter: masonsuyan
+#weibo: suyan0830
+#github: suyan
+#instagram: suyan0830
+#linkedin: suyan0830
+
+# avatar and Favicon
+avatar: http://7u2ho6.com1.z0.glb.clouddn.com/site-avatar.png
+favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+
+# disqus config
+disqus:
+  shortname: raygift
+
+## google analytics config
+# ga:
+#   id: UA-54767140-1
+#   url: yansu.org
+
+# Build settings
+permalink: /:year/:month/:day/:title.html
+markdown: kramdown
+highlighter: rouge
+mathjax: disabled
+sass:
+  style: compressed
+
+# Jekyll Plugin
+# https://help.github.com/articles/adding-jekyll-plugins-to-a-github-pages-site/
+gems:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+

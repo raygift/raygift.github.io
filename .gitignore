@@ -1,12 +1,10 @@
-_site
+_site/
+_drafts/
+.DS_Store
+.idea/
 .sass-cache
+Gemfile
+Gemfile.lock
+_posts/.MWebMetaData/
 .jekyll-metadata
-
-### CodeKit ###
-# General CodeKit files to ignore
-config.codekit
-/min
-
-### CodeKit Patch ###
-*/codekit-config.json
-.codekit-cache
+start
