@@ -22,7 +22,7 @@ recent_num: 20
 
 # avatar and Favicon
 avatar: /assets/img/overthinking.jpg
-favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+favicon: /assets/img/overthinking.jpg
 
 # disqus config
 disqus:
