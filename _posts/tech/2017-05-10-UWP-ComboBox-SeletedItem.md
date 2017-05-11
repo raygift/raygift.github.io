@@ -7,7 +7,6 @@ description: uwp combox
 ---
 
 
-
 之前通过Jekyll与Github搭建了自己的博客，并试着发了几篇，需要去markdown文件中手动修改一些格式和文字，感觉通过直接本地修改markdown文件的书写方式有些繁琐，正巧之前对UWP感兴趣，因此有了实现一个win10上运行的生成Jekyll博客markdown文件的UWP应用的想法，目前简单的摆了一些基本控件，并实现了保存markdown文件的功能，地址是：https://github.com/raygift/MyBlog_UWP
 
 然而在这过程中发现了一个ComboBox取值的问题，UWP开发中使用ComboBox实现下拉选择的功能，但在cs文件中却无法正确获取被选中项的值
