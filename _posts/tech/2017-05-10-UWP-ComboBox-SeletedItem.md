@@ -1,7 +1,7 @@
 ---
 layout: post
 title: UWP ComboBox 取值问题
-category: tech
+category: 技术
 tags: UWP,ComboBox,SeletedItem
 description: uwp combox
 ---
