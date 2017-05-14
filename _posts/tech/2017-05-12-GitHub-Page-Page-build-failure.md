@@ -44,7 +44,7 @@ If you have any questions you can contact us by replying to this email.
 将blog中description补充后，仍然无法正常提交，在drop.rb中尝试使用"p site_title"输出得到的竟然是 _config_yml中site settings中的title，继而发现其中的description后有一个">"，不知什么时候误输入的，删除后再次提交，终于正常
 
 为什么 “>”会报错呢？
-在drop.rb中进行测试，发现format_string("<")可以得到"&1t;" 而 format_string(">") 却会得到nil， format_string("/>")得到" /&gt; "
+在drop.rb中进行测试，发现format_string("<")可以得到"&1t;" 而 format_string(">") 却会得到nil， format_string("/>")得到" / & g t ; "
 
 ## 总结
 “<” “>”两个符号是常见的特殊符号，例如在xml中就必须使用其转义字符来避免与xml标签的混淆，因此猜测ruby也借鉴了此种方式，将“<”“>”视为特殊符号，导致format_string()无法正确的将其转换为string。
