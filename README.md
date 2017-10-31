@@ -1,5 +1,6 @@
 ### 我的博客
 
+地址：[https://raygift.github.io/](https://raygift.github.io/)
 clone自[http://yansu.org](http://yansu.org)
 
 
