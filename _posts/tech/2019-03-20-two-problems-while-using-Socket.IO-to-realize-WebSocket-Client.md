@@ -26,7 +26,7 @@ description: 记录使用Socket.IO实现websocket
 会有如下报错：
 **WebSocket connection to 'ws://localhost:9999/' failed: Connection closed before receiving a handshake response**
 
-原因是“socket.io不是 websocket 组件。尽管socket.io确实在可能的时候使用WebSocket传输，它为每个包增加了一些metadata：包类型（packet type）、namespace以及当需要确认消息时的ack id。这也是为什么一个WebSocket客户端无法成功连接到Socket.io服务端，同样一个socket.io客户端也无法连接到WebServer服务端。”
+原因是“socket.io不是 websocket 的实现。尽管socket.io确实在可能的时候使用WebSocket传输，它为每个包增加了一些metadata：包类型（packet type）、namespace以及当需要确认消息时的ack id。这也是为什么一个WebSocket客户端无法成功连接到Socket.io服务端，同样一个socket.io客户端也无法连接到WebServer服务端。”
 
 Socket.IO官网原文（https://socket.io/docs/#What-Socket-IO-is-not）：
 
