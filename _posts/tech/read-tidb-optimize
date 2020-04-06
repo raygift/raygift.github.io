@@ -1,0 +1,16 @@
+---
+layout: post
+title: 解决tidb有关执行计划的一个简单入门issue
+category: 技术
+tags: Jekyll
+description: 记录提交到tidb的第一个pr
+---
+
+### 整体过程
+1. 学会提交pr
+2. fork+clone代码，进行代码分析
+3. 修改代码进行调试验证
+4. 提交代码，发起pr
+
+
+https://github.com/pingcap/tidb/issues/15387
