@@ -17,9 +17,12 @@ description: 记录提交到tidb的第一个pr
 此类报错包含在tidb/planner/optimizer.go的handleStmtHints函数中
 
 handleStmtHints函数被同一个go文件中的Optimize函数引用了3次
-￼￼55行： 	stmtHints, warns := handleStmtHints(tableHints)
+
+```
+55行： 	stmtHints, warns := handleStmtHints(tableHints)
 93行： 			stmtHints, warns = handleStmtHints(binding.Hint.GetFirstTableHints())
 107行： 		curStmtHints, curWarns := handleStmtHints(binding.Hint.GetFirstTableHints())
+```
 
 Optimize函数被引用的次数就比较多了，包括：
 1. executor/adapter.go
