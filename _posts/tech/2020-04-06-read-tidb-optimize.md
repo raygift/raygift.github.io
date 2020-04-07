@@ -34,4 +34,10 @@ Optimize函数被引用的次数就比较多了，包括：
 7. planner/core/physical_plan_test.go
 8. planner/core/point_get_plan_test.go
 
+从adapter.go处入手，266行： RebuildPlan函数
+根据函数注释理解，此函数作用应为“重建当前执行状态计划。返回'a'所用到的当前schema版本信息”
+但RebuildPlan函数未被任何函数调用 = =
 
+继续分析compiler.go，61行：Compile函数
+“Compile函数为物理计划编写一个ast.StmtNode”
+查找Compile函数被引用情况，发现在session.go中1134行和tidb.go中被使用到，session.go是在tidb启动后查询时经常能看到日志打印的一个文件，此处位于如下注释下“步骤2:将抽象语法树转换为一个物理计划（存储到executor.ExecStmt).有些执行在compile阶段已经被执行完，因此在compile前先重置一下”
