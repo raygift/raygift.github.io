@@ -13,9 +13,13 @@ description: 将nodejs中的回调地狱改为async/await方式
 4. async/await
 
 javascript最直观的异步代码写法为callback，如setTimeout函数
-`setTimeout(function(){},1000)`
+```javascript
+setTimeout(function(){},1000)
+```
 或者request库的http请求：
-`request(option,function(){})`
+```javascript
+request(option,function(){})
+```
 以上两个函数参数中的function即为回调函数
 
 回调函数写法在功能实现上没什么问题，只是面向过程的编程方式中，以下代码组织方式更符合阅读习惯:
