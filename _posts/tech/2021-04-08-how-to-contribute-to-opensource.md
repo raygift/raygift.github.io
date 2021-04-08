@@ -3,7 +3,7 @@ layout: post
 title: 向Github开源项目提交PR，总共分几步？
 category: 技术
 tags: github
-description: 总结一下如何开始向Githu开源项目提交PR，以及如何为TiDB贡献源码
+description: 总结一下如何开始向Github开源项目提交PR，以及如何为TiDB贡献源码
 ---
 
 
