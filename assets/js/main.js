@@ -81,10 +81,8 @@ $(function() {
 
   $(document).on({
     'pjax:click': function() {
-      NProgress.start();
-      main.removeClass('fadeIn');
-    },
-    'pjax:end': function() {
+      // NProgress.start();
+      // main.removeClass('fadeIn');
       afterPjax();
       NProgress.done();
       main.scrollTop(0).addClass('fadeIn');
@@ -92,6 +90,17 @@ $(function() {
       // if($(window).width() <= 1024) {
         menu.add(sidebar).add(main).removeClass('open');
       // }
+    },
+    'pjax:end': function() {
+      NProgress.start();
+      main.removeClass('fadeIn');
+      // afterPjax();
+      // NProgress.done();
+      // main.scrollTop(0).addClass('fadeIn');
+      // // only remove open in small screen
+      // // if($(window).width() <= 1024) {
+      //   menu.add(sidebar).add(main).removeClass('open');
+      // // }
     }
   });
 
