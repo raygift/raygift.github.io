@@ -89,9 +89,9 @@ $(function() {
       NProgress.done();
       main.scrollTop(0).addClass('fadeIn');
       // only remove open in small screen
-      if($(window).width() <= 1024) {
+      // if($(window).width() <= 1024) {
         menu.add(sidebar).add(main).removeClass('open');
-      }
+      // }
     }
   });
 
