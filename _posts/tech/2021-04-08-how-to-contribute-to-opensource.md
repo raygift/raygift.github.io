@@ -1,4 +1,11 @@
-向Githu开源项目提交PR，总共分几步？
+---
+layout: post
+title: 向Githu开源项目提交PR，总共分几步？
+category: 技术
+tags: github
+description: 总结一下如何开始向Githu开源项目提交PR，以及如何为TiDB贡献源码
+---
+
 
 主要参考[如何从零开始参与大型开源项目](https://pingcap.com/blog-cn/how-to-contribute/#%E5%A6%82%E4%BD%95%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%8F%82%E4%B8%8E%E5%A4%A7%E5%9E%8B%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE)
 
@@ -123,7 +130,7 @@ TiDB 要求社区代码贡献者在贡献代码前先签署CLA协议
 >
 > 因为 CLA 是每个公司或组织自定义的，在细节上可能稍有不同，不过都会重点包含这些内容：1. 授予著作权给拥有该软件知识产权的公司或组织；2. 专利许可的授予；3. 签署者保证依法有权授予上述许可；
 
-TiDB 自定义的CLA 的具体内容见[这里][https://cla-assistant.io/pingcap/tidb?pullRequest=16303]，节选一些重点内容如下：
+TiDB 自定义的CLA 的具体内容见[这里](https://cla-assistant.io/pingcap/tidb?pullRequest=16303)，节选一些重点内容如下：
 
 > This license is for your protection as a contributor as well as the protection of PingCAP and its other contributors and users; it does not change your rights to use your own Contributions for any other purpose.
 >
