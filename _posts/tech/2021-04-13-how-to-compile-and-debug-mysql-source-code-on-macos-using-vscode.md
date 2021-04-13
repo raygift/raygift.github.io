@@ -6,7 +6,6 @@ tags: MacOS,MySQL,VS Code
 description: 总结一下如何在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码
 ---
 
-# 在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码
 
 操作系统：MacOS 11.2.2
 
