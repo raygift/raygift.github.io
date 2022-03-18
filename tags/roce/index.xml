@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RoCE on Raygift&#39;s Notes - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/roce/</link>
+    <description>Recent content in RoCE on Raygift&#39;s Notes - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 18 Mar 2022 16:14:02 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/roce/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RDMA 技术概述</title>
+      <link>http://localhost:1313/post/rdma_overview/</link>
+      <pubDate>Fri, 18 Mar 2022 16:14:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/rdma_overview/</guid>
+      <description>RDMA 作为一种高速网络传输技术，在快速发展的数据库领域尤其是分布式数据库中，扮演着越来越重要的角色。传统单体数据库一般只涉及数据库客户端与数据库</description>
+    </item>
+    
+  </channel>
+</rss>
