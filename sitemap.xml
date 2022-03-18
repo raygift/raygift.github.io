@@ -191,20 +191,6 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/combobox/</loc>
-    <lastmod>2017-05-10T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/seleteditem/</loc>
-    <lastmod>2017-05-10T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/tags/uwp/</loc>
     <lastmod>2017-05-10T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
