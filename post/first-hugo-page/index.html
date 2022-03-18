@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Raygift" /><meta name="description" content="使用Hugo 重新搭建博客，之后希望用博客分享一些日常学习的笔记和总结；另外同步一些个人微博内容，作为归档备份，避免被夹时丢失所有过往动态。" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Raygift" /><meta name="description" content="使用Hugo 重新搭建博客，之后希望用博客分享一些日常学习的笔记和总结；另外同步一些个人微博内容，作为归档备份，避免被夹时丢失所有过往动态。 有" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -41,7 +41,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="使用Hugo 更新Github Pages"/>
-<meta name="twitter:description" content="使用Hugo 重新搭建博客，之后希望用博客分享一些日常学习的笔记和总结；另外同步一些个人微博内容，作为归档备份，避免被夹时丢失所有过往动态。"/>
+<meta name="twitter:description" content="使用Hugo 重新搭建博客，之后希望用博客分享一些日常学习的笔记和总结；另外同步一些个人微博内容，作为归档备份，避免被夹时丢失所有过往动态。 有"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -132,11 +132,95 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#hugo-page">hugo-page</a>
+      <ul>
+        <li><a href="#1-创建新文章md-文件">1. 创建新文章md 文件</a></li>
+        <li><a href="#2-本地预览">2. 本地预览</a></li>
+        <li><a href="#3-保存草稿">3. 保存草稿</a></li>
+        <li><a href="#3-文章定稿">3. 文章定稿</a></li>
+        <li><a href="#4-发表文章">4. 发表文章</a></li>
+      </ul>
+    </li>
+    <li><a href="#hugo-文章与图片管理方法">hugo 文章与图片管理方法</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
       <p>使用Hugo 重新搭建博客，之后希望用博客分享一些日常学习的笔记和总结；另外同步一些个人微博内容，作为归档备份，避免被夹时丢失所有过往动态。</p>
+<p>有关使用Hugo 的操作记录如下：</p>
+<h1 id="hugo-page">hugo-page</h1>
+<p><strong>注意执行操作的目录</strong></p>
+<p>文章撰写阶段在hugo-page 目录操作，随后提交到private 仓库 raygift/hugo-page；</p>
+<p>文章发表时先在 hugo-page 目录执行生成静态资源命令<code>hugo</code>，然后进入public 目录，提交到github.io 发表.</p>
+<h2 id="1-创建新文章md-文件">1. 创建新文章md 文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo-page zpc$ hugo new post/name_of_blog.md
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-本地预览">2. 本地预览</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo-page zpc$ hugo server -D
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>浏览器打开 http://localhost:1313</p>
+<h2 id="3-保存草稿">3. 保存草稿</h2>
+<p>向private hugo-page 提交代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo-page zpc$ git add .
+</span></span><span class="line"><span class="cl">hugo-page zpc$ git commit -m &#34;update name_of_blog.md&#34;
+</span></span><span class="line"><span class="cl">hugo-page zpc$ git push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-文章定稿">3. 文章定稿</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo-page zpc$ hugo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-发表文章">4. 发表文章</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo-page zpc$ cd ./public
+</span></span><span class="line"><span class="cl">hugo-page/public zpc$ git add .
+</span></span><span class="line"><span class="cl">hugo-page/public zpc$ git commit -m &#34;public name_of_blog.md&#34;
+</span></span><span class="line"><span class="cl">hugo-page/public zpc$ git push upstream master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="hugo-文章与图片管理方法">hugo 文章与图片管理方法</h1>
+<p>参考 <a href="https://www.isyin.cn/post/2018-05-03-hugo-%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E6%96%B9%E6%A1%88/">hugo-的文件管理方案</a></p>
+<p>若文章存在图片，则在post 中创建一个文件夹与index.md 文件，将所需文件放在文件夹中与index.md 同层级。</p>
+<p>这样能够做到：</p>
+<ol>
+<li>文章中的图片路径写为同级目录 <code>./image.png</code>，可以使用typora 并定义插入图片时复制到文章相同目录</li>
+<li>执行<code>hugo server</code> 本地预览时可正常显示</li>
+<li>执行<code>hugo</code> 发布文章时，生成的静态index.html 与 图片相对路径保持正确</li>
+</ol>
 
     </div>
 
@@ -161,13 +245,9 @@
           <a href="/tags/github-pages/">Github Pages</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/rdma_overview/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">RDMA 技术概述</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/2021-04-13-how-to-compile-and-debug-mysql-source-code-on-macos-using-vscode/">
-            <span class="next-text nav-default">在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码</span>
+        
+        <a class="next" href="/post/rdma_overview/">
+            <span class="next-text nav-default">RDMA 技术概述</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

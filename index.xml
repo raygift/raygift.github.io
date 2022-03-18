@@ -6,23 +6,23 @@
     <description>Recent content on Raygift&#39;s Notes - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 18 Mar 2022 16:14:02 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>RDMA 技术概述</title>
-      <link>http://localhost:1313/post/rdma_overview/</link>
-      <pubDate>Fri, 18 Mar 2022 16:14:02 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/rdma_overview/</guid>
-      <description>RDMA 作为一种高速网络传输技术，在快速发展的数据库领域尤其是分布式数据库中，扮演着越来越重要的角色。传统单体数据库一般只涉及数据库客户端与数据库</description>
-    </item>
-    
+    <lastBuildDate>Fri, 18 Mar 2022 11:22:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用Hugo 更新Github Pages</title>
       <link>http://localhost:1313/post/first-hugo-page/</link>
       <pubDate>Fri, 18 Mar 2022 11:22:48 +0800</pubDate>
       
       <guid>http://localhost:1313/post/first-hugo-page/</guid>
-      <description>使用Hugo 重新搭建博客，之后希望用博客分享一些日常学习的笔记和总结；另外同步一些个人微博内容，作为归档备份，避免被夹时丢失所有过往动态。</description>
+      <description>使用Hugo 重新搭建博客，之后希望用博客分享一些日常学习的笔记和总结；另外同步一些个人微博内容，作为归档备份，避免被夹时丢失所有过往动态。 有</description>
+    </item>
+    
+    <item>
+      <title>RDMA 技术概述</title>
+      <link>http://localhost:1313/post/rdma_overview/</link>
+      <pubDate>Thu, 20 Jan 2022 00:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/rdma_overview/</guid>
+      <description>RDMA 作为一种高速网络传输技术，在快速发展的数据库领域尤其是分布式数据库中，扮演着越来越重要的角色。传统单体数据库一般只涉及数据库客户端与数据库</description>
     </item>
     
     <item>
