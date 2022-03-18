@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Rdma_overview - Raygift&#39;s Notes - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Raygift" /><meta name="description" content="RDMA 概述 RDMA 作为一种高速网络传输技术，在快速发展的数据库领域尤其是分布式数据库中，扮演着越来越重要的角色。传统单体数据库一般只涉及数据库客户端与" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.94.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/rdma_overview/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b874a8796a492f0d7c86bb24c33cbf052935783a5778ebaf819a8e514bf49f10.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Rdma_overview"/>
+<meta name="twitter:description" content="RDMA 概述 RDMA 作为一种高速网络传输技术，在快速发展的数据库领域尤其是分布式数据库中，扮演着越来越重要的角色。传统单体数据库一般只涉及数据库客户端与"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Raygift 学习笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/weibo_archives/">
+        <li class="mobile-menu-item">微博归档</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Raygift 学习笔记</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/weibo_archives/">微博归档</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Rdma_overview</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-18 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rdma-概述">RDMA 概述</a>
+      <ul>
+        <li><a href="#rdma-背景">RDMA 背景</a>
+          <ul>
+            <li><a href="#dma-概述">DMA 概述</a></li>
+            <li><a href="#rdma-与-基于rdma-的网络传输">RDMA 与 基于RDMA 的网络传输</a></li>
+          </ul>
+        </li>
+        <li><a href="#rdma-协议类型">RDMA 协议类型</a></li>
+        <li><a href="#rdma-关键概念">RDMA 关键概念</a>
+          <ul>
+            <li><a href="#work-queue">Work Queue</a></li>
+            <li><a href="#queue-pair">Queue Pair</a></li>
+            <li><a href="#completion-queue">Completion Queue</a></li>
+            <li><a href="#work-request-与-work-completion">Work Request 与 Work Completion</a></li>
+          </ul>
+        </li>
+        <li><a href="#rdma-操作类型">RDMA 操作类型</a>
+          <ul>
+            <li><a href="#双端操作rdma-sendrecv">双端操作：RDMA Send/Recv</a></li>
+            <li><a href="#单端操作rdma-readwrite">单端操作：RDMA Read/Write</a></li>
+          </ul>
+        </li>
+        <li><a href="#rdma-优势总结">RDMA 优势总结</a></li>
+        <li><a href="#结语">结语</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="rdma-概述">RDMA 概述</h1>
+<p>RDMA 作为一种高速网络传输技术，在快速发展的数据库领域尤其是分布式数据库中，扮演着越来越重要的角色。传统单体数据库一般只涉及数据库客户端与数据库服务端的通信，而由于存算分离的设计，在分布式数据库中常常有多个数据库组件之间的协同工作，一个典型的场景是SQL 引擎层在为SQL 语句生成好执行计划后，需要将执行计划通过网络请求发送到数据存储层，存储层再将查询的结果作为响应返回给SQL 引擎层；随着分布式数据库普及与发展，整个数据库集群中的网络交互明显增加，对于集群内部网络通信性能的需求也“水涨船高”，RDMA 这种更加高速的网络传输技术正在被越来越多的研究与应用，本文将从RDMA 的背景、关键概念、以及技术优势三个方面对RDMA 的基本知识进行简要阐述。</p>
+<p>RDMA，全称为 ”Remote Direct Memory Access“，是一种网络传输技术。早期的RDMA 技术使用InfiniBand 协议，对于网络设施的要求很高，因此只在特定领域进行有限应用，比如此前在数据库领域中，传统商业数据库 DB2 的pureScale技术和Oracle 的一体机方案中都有使用基于InfiniBand 的RDMA 技术；随着基于以太网的RDMA 协议RoCE的成熟，以及支持RoCE 的高速网卡等硬件在数据中心的普及，RDMA 正在高性能计算、深度学习框架、分布式存储等对网络传输要求较高的场景中快速发展，例如Aurora、OceanBase、PolarDB 等众多新兴分布式数据库都已经对此有较多的研究与实践。</p>
+<h2 id="rdma-背景">RDMA 背景</h2>
+<p>从RDMA 的名称就让人联想到是不是与DMA 技术有些渊源，实际上RDMA 确实是在DMA 基础之上实现的。DMA 可能大家接触的多一些，在很多Zero-Copy 的场景（如Kafka ）中都有应用；在开始介绍RDMA 之前，让我们先对DMA 做一个简单回顾。</p>
+<h3 id="dma-概述">DMA 概述</h3>
+<p>DMA 全称 “Direct Memory Access”，翻译为<strong>直接存储器访问</strong>，这里的存储器是指SRAM 等内部存储器。</p>
+<p>我们知道CPU 是系统运行的核心，担负着计算、控制程序转移以及数据转移等任务；相比于其他复杂事务，数据的复制与存储较为简单，但却占用了很多CPU 资源；如果能将这部分工作交由专门硬件控制，让CPU 解放出来去处理更多复杂事务，便可以更好的利用CPU。</p>
+<p>DMA 是就为了解决在外设和存储器或存储器和存储器之前进行数据传输时，需要占用CPU 资源的问题。</p>
+<p>DMA 的实现涉及到DMA 控制器、DMA通道、仲裁器等硬件的支持，在此我们不再过多深究，只需要知道通过DMA 我们可以在外设（如磁盘、网卡）与存储器或内部存储器之间进行数据传输，而不需要CPU 及CPU 寄存器的参与。</p>
+<p><em>无DMA 参与的I/O 示意图如下：</em></p>
+<p><img src="./image-20220120142407112.png" alt="image-20220120142407112"></p>
+<p><em>有DMA 参与的I/O 示意图如下：</em></p>
+<p><img src="./image-20220120142514385.png" alt="image-20220120142514385"></p>
+<h4 id="基于dma-的传统网络传输">基于DMA 的传统网络传输</h4>
+<p>在使用了DMA 技术之后，我们实际编写应用程序进行tcp/http 通信时，在发送端与接收端的链接建立完成之后，一次发送和接收数据的过程可以概述如下：</p>
+<ul>
+<li>发送数据</li>
+</ul>
+<ol>
+<li>应用程序准备好要发送的数据，调用write/sendto 系统调用，传入要操作的fd、待发送数据的内存地址以及数据长度；</li>
+<li>系统调用write 导致一次用户空间到内核空间的上下文切换，用户空间中的数据被复制到内核空间中的socket 缓冲区SKB 中；在SKB 中将完成各协议栈报文头的组装。</li>
+<li>系统调用write 执行结束，返回时会又一次导致内核空间到用户空间的上下文切换，被复制到SKB 中的待发送数据会在DMA 引擎的控制下被传递到网卡驱动中，然后被通过物理链路传输出去。</li>
+</ol>
+<ul>
+<li>接收数据</li>
+</ul>
+<ol>
+<li>经由物理链路传输来的数据包，首先会到达接收端网卡的接收队列。</li>
+<li>DMA 将数据复制到网卡驱动分配并初始化的内核空间缓冲区中</li>
+<li>网卡发出硬件中断，给CPU物理引脚施加电压变化通知CPU 有数据到达</li>
+<li>CPU 简单处理硬中断后发出软中断，特定内核线程发现软中断后，会调用网卡驱动对已经处于内核空间缓冲区的数据进行协议解析等处理 ，并将处理后的数据放入到socket 的接收缓冲区</li>
+<li>应用程序（通过阻塞等待或轮询）从内核得知有新数据到达的消息后，调用 read/recvfrom 系统调用，从socket 缓冲区中将数据从内核空间读取到用户空间</li>
+</ol>
+<p><img src="./image-20220120130644697.png" alt="image-20220120130644697"></p>
+<p>可以看到上述数据的发送和接收步骤中，将数据在网卡与内核空间的移动就是由DMA 完成的；另外我们还可以看到，虽然数据的移动已经有DMA 来负责，但CPU 在数据发送和接收过程中仍然起到了非常重要的作用，这部分工作便是将待发送的数据根据传输协议进行封装，以及对接收到的网络数据包进行解析。</p>
+<p>我们思考这样一个问题：报文的封装与解析一定要CPU 来做吗，是否可以将CPU 从这些固定且繁重的工作中解放出来呢？</p>
+<p>这便引出了我们的主题：RDMA</p>
+<h3 id="rdma-与-基于rdma-的网络传输">RDMA 与 基于RDMA 的网络传输</h3>
+<p>RDMA（Remote Direct Memory Access）翻译为远程直接地址访问，《RDMA Aware Networks Programming  User Manual》中对其的解释为 “Accessing memory in a remote side without involvement of the remote CPU”，也即“在远端服务器CPU 不参与的情况下完成对其数据的访问”。</p>
+<p>这里我们需要正确理解对远端数据的直接访问，在所谓的直接访问时，数据依然要通过网络设备，并按照约定好的RDMA 相关网络协议进行传输，但与传统基于TCP/IP 协议的网络传输又有很大区别。</p>
+<p>在DMA 概述中我们介绍过，经由传统TCP/IP 网络传输的数据包需要在CPU 的参与下完成协议的封装和解析，而基于RDMA 网卡的数据传输，除了网卡与内存之间的数据移动无需CPU 参与，对于传输协议的封装和解析也交由硬件网卡实现。</p>
+<p>由于无需CPU 对数据进行协议处理，因此应用程序还可以省去将待发送数据复制到内核的步骤，通过RDMA 进行数据发送的简化步骤如下：</p>
+<ul>
+<li>RDMA 发送数据</li>
+</ul>
+<ol>
+<li>应用程序通知网卡硬件发送数据，并告知硬件待发送数据的内存地址，此时的待发送数据存在于用户空间</li>
+<li>RDMA 网卡通过DMA 从用户空间中获得待发送数据，根据RDMA 协议组装成报文发送给对端</li>
+</ol>
+<ul>
+<li>RDMA 接收数据</li>
+</ul>
+<ol>
+<li>应用程序在能够接收数据前，需要首先通知网卡硬件准备接收数据，并告知硬件接收到的数据存放的内存地址</li>
+<li>RDMA 网卡在收到物理链路传输来的报文后，对其进行协议解析并通过DMA 直接将数据写入用户空间的内存</li>
+<li>RDMA 网卡通知应用程序，应用程序获得通知后便可读取已经位于用户空间的数据</li>
+</ol>
+<p><img src="./image-20220120130803912.png" alt="image-20220120130803912"></p>
+<p>（更加详细的RDMA 原理可以参考<a href="https://blog.csdn.net/zz2633105/article/details/119519952">这篇文章</a>）</p>
+<p>在上述RDMA 的通信流程中，可以看到两个特点，这也是RDMA 技术两个显著优势：</p>
+<ul>
+<li>Zero Copy</li>
+</ul>
+<p>由于RDMA 网卡支持DMA 操作，因此DMA 所具有的优势在RDMA 中仍然保留。数据在用户空间和网卡之间的移动均由DMA 处理，避免了用户空间到内核空间的多次copy</p>
+<ul>
+<li>Kernel Bypass</li>
+</ul>
+<p>得利于RDMA 网卡硬件对数据的协议卸载和封装，数据与网络报文之间的转换不再需要CPU 全程参与，实际与TCP/IP 对比可发现网络传输过程中 sys cpu time 的显著下降</p>
+<p>另外我们注意到在接收数据的第一步操作中，接收方在接收数据前需要显示的做一些准备工作，这也是RDMA 传输的另外一个不同于socket 的特点，在后续RDMA 操作中我们将看到准备工作的具体内容。</p>
+<h2 id="rdma-协议类型">RDMA 协议类型</h2>
+<p>RDMA 本身是一种网络传输技术，而在具体实践应用时，存在多种不同的协议，包括Infiniband（简称IB）、RDMA over Converged Ethernet（简称RoCE）和internet Wide Area RDMA Protocol（简称iWarp），这三种协议提供给开发者的编程接口是相同的，区别主要是底层实现所依赖的网络基础设施与网络各层的协议有所不同，以下为三种协议的对比示意图（<a href="https://www.snia.org/sites/default/files/ESF/RoCE-vs.-iWARP-Final.pdf">图片来源</a>）</p>
+<p><img src="./image-20220104155520373.png" alt="image-20220104155520373"></p>
+<ul>
+<li>Infiniband 协议</li>
+</ul>
+<p>2000年由IBTA（InfiniBand Trade Association，独立于各个厂商的制定IB协议的组织）提出，其规定了一套完整的链路层到传输层（此处并非指传统OSI七层模型的传输层，而是位于其之上）规范，但是其无法兼容现有以太网，除了需要支持IB的网卡之外，企业如果想部署的话还要配套的IB交换设备，实现成本较高</p>
+<ul>
+<li>RoCE 协议</li>
+</ul>
+<p>RoCE 是基于以太网链路层的RDMA 协议，存在RoCEv1和RoCEv2 两个版本。其中v1 版本在网络层仍然使用IB协议（因此仍然必须配合IB 交换机设备才可使用），而v2 版本使用UDP/IP 做为网络层的协议（也即报文在OSI七层的传输层仍然被封装为UDP 数据包，在网络层仍然被封装为IP数据包），数据包在传统以太网交换机上可以被路由到正确目标，这大大降低了企业数据中心基础设施的部署成本，只要在现有以太网中配合上支持RoCE 的网卡即可；也由于这些特性，RoCEv2 在实际场景中应用较多。</p>
+<ul>
+<li>iWarp 协议</li>
+</ul>
+<p>iWarp 是IETF （负责开发、支持开源跨平台IB协议的非盈利组织，与上述IBTA 是配合关系）提出的基于TCP 的可靠协议。由于使用TCP 可靠连接，相比RoCEv2 在性能上有一定差距。</p>
+<h2 id="rdma-关键概念">RDMA 关键概念</h2>
+<p>上一章中我们对RDMA 的背景和基本概念进行了阐述，本章将对RDMA 中涉及到的一些通用关键概念进行介绍，这里所说的通用是因为无论哪种RDMA 协议，都对上层应用暴露了相同的API，因此其对应的核心概念也是一致的。</p>
+<p>在传统网络编程中，Socket 是其核心概念，网络的连接建立与数据传输都可以通过对socket 执行系统调用来实现；而在RDMA 编程中，QueuePair 是类似socket 角色的概念，<strong>RDMA 通信的基本单元是QP</strong></p>
+<p>QueuePair 直译为“队列对”，这里的队列是指RDMA 中的Work Queue（简写为WQ）；Queue Pair 就是指一对共两个WQ 的组合。那么Work Queue 又是什么意思呢？</p>
+<h3 id="work-queue">Work Queue</h3>
+<p>work queue 字面意思为“工作队列”，在上面章节中我们提到，RDMA 网络传输时，应用程序会通知硬件网卡要执行发送或者接收数据的动作，并将准备存放数据的内存地址告诉硬件网卡。硬件正是通过WorkQueue 接收应用程序给的操作通知的，因此我们可以将WQ 理解为“存放任务的队列”，而队列中的每个元素就代表了应用程序试图执行的一个“任务说明”，也被称作WQE（work queue element，工作队列元素）。</p>
+<p>此处使用队列是利用其先入先出的特点，从而保证了应用程序提交给硬件的任务被按入队顺序执行。应用不断向队列尾部添加元素，而硬件不断从队首取出任务并执行，示意图如下：</p>
+<p><img src="./image-20220120131325082.png" alt="image-20220120131325082"></p>
+<h3 id="queue-pair">Queue Pair</h3>
+<p>现在我们已经知道 queue pair 中的”queue“ 是work queue，那为什么需要两个WQ 组成一个“pair”呢？这是因为RDMA 将数据发送和接收任务使用了独立的WQ，分别称为SQ（send queue） 和RQ（recv queue）；SQ和RQ总是成对出现的，不会脱离QP存在，在RDMA 编程中我们一般是直接操作QP，而非SQ和RQ。</p>
+<p>应用程序可以创建多个QP ，而每个QP 只能对应某一个应用程序。</p>
+<h3 id="completion-queue">Completion Queue</h3>
+<p>Completion Queue 意为完成队列，是与WQ 对应的概念；放入WQ 中的WQE 在被硬件处理完成后，会在CQ 中产生一个CQE（completion queue element），CQE 可以视作“任务说明”WQE 对应的“任务完成报告”，一个QP 会对应存在一个send CQ 和 recv CQ，分别存放send work request 和recv work request 的执行完成报告。</p>
+<h3 id="work-request-与-work-completion">Work Request 与 Work Completion</h3>
+<p>在了解了 QP、WQ和CQ 之后，我们还需要认识一下WR 和 WC；实际上WR 和WC 只是 WQE 和CQE 概念在用户态API 中的称谓，因为WQE 和CQE 都是网卡驱动中的概念，而应用程序无法直接操作网卡驱动；RDMA 暴露到用户态的API 是以WR 和WC 呈现给应用程序的，应用程序对WR 和WC 的操作实质上就是对 WQE 和CQE 的操作。如下图所示（图片来源 <a href="https://www.afs.enea.it/asantoro/V1r1_2_1.Release_12062007.pdf">InfiniBand Architecture Specification Volume 1</a> ，Page93 ）</p>
+<p><img src="./image-20220120142117129.png" alt="image-20220120142117129"></p>
+<p>在介绍完以上几个重要概念之后，我们便可以将RDMA 通信逻辑使用这些概念进行更具体的描述，如下图所示：</p>
+<p><img src="./image-20220120141419435.png" alt="image-20220120141419435"></p>
+<ul>
+<li>RDMA Recv接收数据</li>
+</ul>
+<p>R1. 接收端应用程序向QP的WQ中添加一个接收数据的WR，QP的SQ中会对应新增一个WQE；</p>
+<p>R2. 接收端硬件从QP 的 RQ中拿到接收数据的WQE，准备接收数据。</p>
+<p>R3. 接收端收到数据，进行校验后回复ACK报文给发送端。</p>
+<p>R4. 接收端硬件将数据放到WQE中指定的位置，然后生成“任务报告”CQE，放置到CQ中。</p>
+<p>R5. 接收端应用从CQ 中取得任务完成信息WC。</p>
+<ul>
+<li>RDMA Send发送数据</li>
+</ul>
+<p>S1. 发送端应用程序向WQ 中添加一个发送数据的WR，WQ 中会对应新增一个 WQE；</p>
+<p>S2. 发送端硬件从QP 的SQ中拿到发送数据的WQE，从内存中拿到待发送数据，组装数据包。</p>
+<p>S3. 发送端网卡将数据包通过物理链路发送给接收端网卡。</p>
+<p>S4. 发送端网卡收到ACK后，生成CQE，放置到CQ中。</p>
+<p>S5. 发送端应用程序从CQ 中取得任务完成信息WC。</p>
+<h2 id="rdma-操作类型">RDMA 操作类型</h2>
+<p>RDMA 技术中存在两组操作类型，RDMA Send/Recv 和RDMA Read/Write；在第一章介绍基于RDMA 的网络传输以及第二章介绍RDMA 关键概念时，我们使用的是RDMA 的Send/Recv 操作类型，这是一种加入了zero-copy 和 kernel-bypass 的传统网络通信的升级版，并未发挥出RDMA 的最大优势，本章我们对RDMA 这两组操作类型进行对比介绍，下图前两部分也可以直观的看到write/read 与send/recv 在对端CPU 介入上的区别。</p>
+<p><img src="./image-20220105162702495.png" alt="image-20220105162702495"></p>
+<h3 id="双端操作rdma-sendrecv">双端操作：RDMA Send/Recv</h3>
+<p>Send/Recv 的详细流程如上一章RDMA 关键概念最后所述，由于每次Send/Recv 需要发送方和接收方两端都参与，即每次发送，接收端必须首先提交一个recv work request，发送方提交的send work request 才会正确执行并得到对应WC，因此把Send/Recv 称作双端操作。</p>
+<h3 id="单端操作rdma-readwrite">单端操作：RDMA Read/Write</h3>
+<p>与Send/Recv 双端操作不同，Read/Write 是单端操作。单端的意思是准备阶段之后，每次数据的发送无需双端都参与，而只有执行RDMA Read或者RDMA Write 的一端操作即可，对端在此过程中无感知。</p>
+<p>因为RDMA Write 与 RDMA Read 是两种不同的操作，下面我们对两个操作进行单独说明。</p>
+<h4 id="rdma-write">RDMA Write</h4>
+<p>RDMA Write 是本端主动写入远端内存的操作。在准备阶段之后，数据传输阶段过程中远端CPU 对于内存被写入是无感知的。</p>
+<p>具体来说，整个过程的两个阶段如下：</p>
+<ul>
+<li>RDMA Write 准备阶段</li>
+</ul>
+<p>在准备阶段，本端通过其他方式（比如RDMA 的Send/Recv）获得对端的内存地址以及访问对端内存所需的 rkey，rkey 是为了控制远端内存的访问权限；</p>
+<ul>
+<li>RDMA Write 数据传输阶段</li>
+</ul>
+<p>本端准备好待发送数据，提交一个包含待发送数据地址，对端内存地址以及对端内存地址访问rkey 的work request，提交的WR 仍然是加入到QP 的Send Queue 中。</p>
+<p>远端接收到RDMA Write 的报文后，会将数据放入目标内存地址，并向发送端响应ACK；</p>
+<p>执行一次RDMA Write 的示例代码如下，可以清楚的观察传入的目标地址与rkey 等信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">ibv_send_wr</span> <span class="n">wr</span><span class="p">,</span> <span class="o">*</span><span class="n">bad</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">wr</span><span class="p">.</span><span class="n">wr_id</span> <span class="o">=</span> <span class="n">rs_send_wr_id</span><span class="p">(</span><span class="n">wr_data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">wr</span><span class="p">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">wr</span><span class="p">.</span><span class="n">sg_list</span> <span class="o">=</span> <span class="n">sgl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">wr</span><span class="p">.</span><span class="n">num_sge</span> <span class="o">=</span> <span class="n">nsge</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">wr</span><span class="p">.</span><span class="n">opcode</span> <span class="o">=</span> <span class="n">IBV_WR_RDMA_WRITE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">wr</span><span class="p">.</span><span class="n">send_flags</span> <span class="o">=</span> <span class="n">flags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">wr</span><span class="p">.</span><span class="n">wr</span><span class="p">.</span><span class="n">rdma</span><span class="p">.</span><span class="n">remote_addr</span> <span class="o">=</span> <span class="n">addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">wr</span><span class="p">.</span><span class="n">wr</span><span class="p">.</span><span class="n">rdma</span><span class="p">.</span><span class="n">rkey</span> <span class="o">=</span> <span class="n">rkey</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nf">rdma_seterrno</span><span class="p">(</span><span class="n">ibv_post_send</span><span class="p">(</span><span class="n">rs</span><span class="o">-&gt;</span><span class="n">cm_id</span><span class="o">-&gt;</span><span class="n">qp</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">wr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bad</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，操作过程中使用到的内存地址实际上是一个<strong>虚拟地址</strong>，实际的物理地址需要由RDMA网卡对虚拟地址进行转换得到。</p>
+<h4 id="rdma-read">RDMA Read</h4>
+<p>RDMA Read 是本端主动读取远端内存的行为。同RDMA WRITE一样，准备阶段之后的数据传输过程中CPU不需要参与，也不感知数据在内存中被读取的过程。</p>
+<ul>
+<li>RDMA Read 准备阶段</li>
+</ul>
+<p>与RDMA Write 准备阶段一样，通过数据传输获得对端的内存地址以及rkey</p>
+<ul>
+<li>RDMA Read 数据传输</li>
+</ul>
+<p>本端提交WR 之后，远端会根据WR 要读取的内存地址，将待读取的数据组装成响应报文；</p>
+<p>请求端收到响应报文后，就可以成功获取到目标数据。</p>
+<p>再次强调这里的响应端组装报文等操作是没有CPU 参与的，因此被读取数据的一端CPU 对于数据被读取是无感知的。</p>
+<h2 id="rdma-优势总结">RDMA 优势总结</h2>
+<ul>
+<li>零拷贝(Zero-copy)：</li>
+</ul>
+<p>零拷贝网络技术使NIC 可以直接与应用内存相互传输数据，从而消除了在应用内存与内核内存之间复制数据的需要.内核内存旁路使应用无需执行内核内存调用就可向NIC 发送命令.在不需要任何内核内存参与的条件下， RDMA 请求从用户空间发送到本地NIC，并通过网络发送给远程NIC ，这就减少了在处理网络传输流时内核内存空间与用户空间之间环境切换的次数。</p>
+<ul>
+<li>内核旁路(Kernel bypass)：</li>
+</ul>
+<p>数据传输直接在用户层来进行传输，无须进行进入内核态，也不用进行系统内存。</p>
+<ul>
+<li>不需要CPU干预(No CPU involvement)：</li>
+</ul>
+<p>一旦应用已经系统上注册了RDMA对应的内存。之后，再进行数据传输就不需要CPU进行干预。也就是不需要再想TCP/IP一样进行拥塞避免等操作。</p>
+<ul>
+<li>消息基于事务(Message based transactions)：</li>
+</ul>
+<p>不像TCP/IP协议一样基于字节流进行传输，RDMA的协议是通过一个消息来进行传输，处理消息和存储消息的位置自然是各种消息队列。</p>
+<ul>
+<li>支持分散/聚合条目(Scatter/gather entries support)：</li>
+</ul>
+<p>RDMA原生态支持分散/聚合。也就是说，读取多个内存缓冲区然后作为一个流发出去或者接收一个流然后写入到多个内存缓冲区里去。</p>
+<h2 id="结语">结语</h2>
+<p>本文简要介绍了 RDMA 技术的背景、关键概念和操作以及RDMA 基本带来的一些优势，对初次接触 RDMA 网络编程所要掌握的基本知识进行简单整理；鉴于RDMA 的技术细节很多，一篇文章无法将所有细节囊括其中，希望可以让读者对RDMA 有一个初步的认识。目前数据库团队组内在持续对RDMA 网络通信及支持RDMA 的RPC 通信进行研究，欢迎感兴趣的同学一起交流讨论。</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://www.afs.enea.it/asantoro/V1r1_2_1.Release_12062007.pdf">InfiniBand Architecture Specification Volume 1</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1030881">网卡收包流程</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/256428917">图解Linux网络包接收过程</a></p>
+<p><a href="https://segmentfault.com/a/1190000008836467">Linux网络数据包的接收过程</a></p>
+<p><a href="https://blog.csdn.net/zz2633105/article/details/119519952">DMA与RDMA</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/164908617">RDMA杂谈知乎专栏</a></p>
+<p>[PolarDB与RDMA核心技术简介](</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Raygift</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-03-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/first-hugo-page/">
+            <span class="next-text nav-default">使用Hugo 更新Github Pages</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:bgtickt@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/raygift" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/6501440811" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Raygift</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
