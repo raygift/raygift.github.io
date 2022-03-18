@@ -17,6 +17,78 @@
     </item>
     
     <item>
+      <title>在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码</title>
+      <link>http://localhost:1313/post/2021-04-13-how-to-compile-and-debug-mysql-source-code-on-macos-using-vscode/</link>
+      <pubDate>Tue, 13 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2021-04-13-how-to-compile-and-debug-mysql-source-code-on-macos-using-vscode/</guid>
+      <description>在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码 操作系统：MacOS 11.2.2 MySQL源码版本：5.6.47 VS Code 版本：M</description>
+    </item>
+    
+    <item>
+      <title>向Github开源项目提交PR，总共分几步？</title>
+      <link>http://localhost:1313/post/2021-04-08-how-to-contribute-to-opensource/</link>
+      <pubDate>Thu, 08 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2021-04-08-how-to-contribute-to-opensource/</guid>
+      <description>主要参考如何从零开始参与大型开源项目 通用步骤 1. fork开源项目 打开Github，找到开源项目主页，点击右上角“Fork” 经过数秒的loadi</description>
+    </item>
+    
+    <item>
+      <title>chrome扩展程序入门实践</title>
+      <link>http://localhost:1313/post/2020-07-04-first-chrome-extension/</link>
+      <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2020-07-04-first-chrome-extension/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>将nodejs中的回调地狱改为async/await方式</title>
+      <link>http://localhost:1313/post/2020-06-25-change-callback-to-asyncawait-copy/</link>
+      <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2020-06-25-change-callback-to-asyncawait-copy/</guid>
+      <description>nodejs异步代码历史 callback: (hell) Promise: ES2015标准中加入，此前有第三方库如bluebird、co实现 Generator: ES2015标准中加入，基于Promise</description>
+    </item>
+    
+    <item>
+      <title>解决tidb有关执行计划的一个简单入门issue</title>
+      <link>http://localhost:1313/post/2020-04-06-read-tidb-optimize/</link>
+      <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2020-04-06-read-tidb-optimize/</guid>
+      <description>整体过程 学会提交pr fork+clone代码，进行代码分析 修改代码进行调试验证 提交代码，发起pr 代码分析 本issue目的是将&amp;quot;Th</description>
+    </item>
+    
+    <item>
+      <title>Socket.IO实现WebSocket的client端两个小坑</title>
+      <link>http://localhost:1313/post/2019-03-20-two-problems-while-using-socket.io-to-realize-websocket-client/</link>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2019-03-20-two-problems-while-using-socket.io-to-realize-websocket-client/</guid>
+      <description>使用Socket.IO实现websocket时，遇到两个小坑，记录如下： Socket.IO无法创建一个可使用（js原生WebSocket方法</description>
+    </item>
+    
+    <item>
+      <title>Page build failure with no details from Github page</title>
+      <link>http://localhost:1313/post/2017-05-12-github-page-page-build-failure/</link>
+      <pubDate>Fri, 12 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2017-05-12-github-page-page-build-failure/</guid>
+      <description>问题描述 在Github Page 上搭建的博客，上传markdown格式的blog文件后，发现博客列表中找不到该文章，且收到一封GitHub发来的Em</description>
+    </item>
+    
+    <item>
+      <title>UWP ComboBox 取值问题</title>
+      <link>http://localhost:1313/post/2017-05-10-uwp-combobox-seleteditem/</link>
+      <pubDate>Wed, 10 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2017-05-10-uwp-combobox-seleteditem/</guid>
+      <description>之前通过Jekyll与Github搭建了自己的博客，并试着发了几篇，需要去markdown文件中手动修改一些格式和文字，感觉通过直接本地修改</description>
+    </item>
+    
+    <item>
       <title>在github使用Jekyll搭建blog</title>
       <link>http://localhost:1313/post/2017-04-06-create-blog-on-github-using-jekyll/</link>
       <pubDate>Thu, 06 Apr 2017 00:00:00 +0800</pubDate>

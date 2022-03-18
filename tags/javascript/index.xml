@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JavaScript on Raygift&#39;s Notes - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/javascript/</link>
+    <description>Recent content in JavaScript on Raygift&#39;s Notes - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 25 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将nodejs中的回调地狱改为async/await方式</title>
+      <link>http://localhost:1313/post/2020-06-25-change-callback-to-asyncawait-copy/</link>
+      <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2020-06-25-change-callback-to-asyncawait-copy/</guid>
+      <description>nodejs异步代码历史 callback: (hell) Promise: ES2015标准中加入，此前有第三方库如bluebird、co实现 Generator: ES2015标准中加入，基于Promise</description>
+    </item>
+    
+    <item>
+      <title>Socket.IO实现WebSocket的client端两个小坑</title>
+      <link>http://localhost:1313/post/2019-03-20-two-problems-while-using-socket.io-to-realize-websocket-client/</link>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2019-03-20-two-problems-while-using-socket.io-to-realize-websocket-client/</guid>
+      <description>使用Socket.IO实现websocket时，遇到两个小坑，记录如下： Socket.IO无法创建一个可使用（js原生WebSocket方法</description>
+    </item>
+    
+  </channel>
+</rss>

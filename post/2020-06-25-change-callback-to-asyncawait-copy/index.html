@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>将nodejs中的回调地狱改为async/await方式 - Raygift&#39;s Notes - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Raygift" /><meta name="description" content="将nodejs中的回调地狱改为async/await方式" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.94.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/2020-06-25-change-callback-to-asyncawait-copy/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b874a8796a492f0d7c86bb24c33cbf052935783a5778ebaf819a8e514bf49f10.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="将nodejs中的回调地狱改为async/await方式"/>
+<meta name="twitter:description" content="将nodejs中的回调地狱改为async/await方式"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Raygift 学习笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Raygift 学习笔记</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">将nodejs中的回调地狱改为async/await方式</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-25 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#nodejs异步代码历史">nodejs异步代码历史</a></li>
+          </ul>
+        </li>
+        <li><a href="#1-callback-hell">1. callback hell</a></li>
+        <li><a href="#2-promise">2. Promise</a></li>
+        <li><a href="#3-generator">3. Generator</a></li>
+        <li><a href="#4-asyncawait">4. async/await</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="nodejs异步代码历史">nodejs异步代码历史</h3>
+<ol>
+<li>callback: (hell)</li>
+<li>Promise: ES2015标准中加入，此前有第三方库如bluebird、co实现</li>
+<li>Generator: ES2015标准中加入，基于Promise，提供了yeild语法糖</li>
+<li>async/await: ES2017新特性，基于Promise；最早有第三方async模块，只是名称类似，详见附录</li>
+</ol>
+<hr>
+<h2 id="1-callback-hell">1. callback hell</h2>
+<p>javascript最直观的异步代码写法为callback，如setTimeout函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span><span class="c1">//回调函数执行成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;success&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">{</span><span class="c1">//回调函数执行失败
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;error&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span><span class="mi">1000</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者request库的http请求：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">request</span><span class="p">(</span><span class="nx">option</span><span class="p">,</span><span class="kd">function</span><span class="p">(){})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上两个函数参数中的function即为回调函数</p>
+<p>回调函数写法在功能实现上没什么问题，只是面向过程的编程方式中，以下代码组织方式更符合阅读习惯:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">setTimeOut</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">functionA</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">request</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">functionB</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>另外回调函数在后续代码依赖前面代码的执行结果时，多个阶段的代码必须使用嵌套实现，从而导致&quot;回调地狱&quot;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">request</span><span class="p">(</span><span class="nx">option</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">},</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span><span class="mi">1000</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由于回调函数执行结果的未知性，导致只能掉入回调地狱，代码的可读性变差，为了解决这个问题，社区进行了持续的探索</p>
+<hr>
+<h2 id="2-promise">2. Promise</h2>
+<p>Promise可以理解为一个状态机，只会处于三种状态中的某一种：Pending、Resolve、Reject</p>
+<ul>
+<li>pending表示回调正在执行，尚未获得执行结果</li>
+<li>resolved表示回调执行完毕，且执行成功</li>
+<li>rejected表示回调执行完毕，但执行失败</li>
+</ul>
+<p>Pending状态一旦转换到Resolve或Reject状态，则无法回退或更改。resolved状态的另外一个说法是fulfilled状态</p>
+<p>将回调函数写法改为Promise写法比较简单，如将setTimeout异步函数改写为promise写法，得到如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">promise_setTimeout</span><span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;flag 1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span><span class="c1">//回调函数执行成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;flag 2&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">resolve</span><span class="p">(</span><span class="s2">&#34;success&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">{</span><span class="c1">//回调函数执行失败
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">reject</span><span class="p">(</span><span class="s2">&#34;error&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Promise永远返回一个Promise对象，而不会返回执行结果的具体值，代码中的resolve、reject分别是Promise.resolve和Promise.reject方法，作用就是将其非Promise的参数&quot;success&quot;和&quot;error&quot;转化为Promise对象（Promise.resolve和Promise.reject作用到参数时，要求参数是拥有then方法的thenable对象，否则转换后的对象自动处于resolved或rejected状态，这也是为何此处可以用字符串参数来实现异步函数执行成功或执行失败状态的模拟）</p>
+<p>由上述例子我们看到，只需要在异步函数外层定义一个Promise对象，将整个异步函数包起来，在异步函数的回调函数中，判断执行成功，则调用resolve方法返回执行成功的Promise对象；判断异步执行失败，则调用reject方法返回执行失败的Promise对象即可</p>
+<p>以上改写后的Promise对象promise_setTimeout，在创建后就会立即执行，因此flag1先被输出，等待1秒钟后输出flag2和success，表示回调函数的执行结果为成功</p>
+<p>然而目前我们并没有达到预想目标，改写后的回调函数要具备优秀的顺序可读性，关键在于获取到Promise对象后，使用then获取成功执行的结果，使用catch获取执行失败的结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">promise_setTimeout</span><span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;flag 1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span><span class="c1">//回调函数执行成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;flag 2&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">resolve</span><span class="p">(</span><span class="s2">&#34;success&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">{</span><span class="c1">//回调函数执行失败
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">reject</span><span class="p">(</span><span class="s2">&#34;error&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//下面一行代码的写法为：只处理回调函数成功执行后的结果(不进行异常捕获是很危险的)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">promise_setTimeout</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">){})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//下面一行代码的写法为：只捕获执行失败时reject带回的异常
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">promise_setTimeout</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//下面一行代码的写法为：回调函数执行成功时获取执行结果，执行失败时捕获异常
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">promise_setTimeout</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">){}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有关上述代码的几点补充说明：</p>
+<ol>
+<li>此setTimeout的回调函数中，由于永远进入if(true)分支，因此始终会返回resolved状态的Promise对象</li>
+<li>resolve和reject都只是参数变量，改为okokok或者nonono代表Promise.resolve和Promise.reject方法也没问题</li>
+<li>何时为回调执行成功、何时为回调执行失败，全凭何时调用resolve和reject</li>
+<li>回调执行时抛出的异常，或者返回的reject，若没有catch捕获，则会报错&quot;UnhandledPromiseRejectionWarning: Unhandled promise rejection.&quot;</li>
+</ol>
+<hr>
+<h2 id="3-generator">3. Generator</h2>
+<hr>
+<h2 id="4-asyncawait">4. async/await</h2>
+<p>asyncFunction(somecode,function(params){
+doSomeThingWithParams;
+})</p>
+<p>改写为async/await:
+function fn(){
+return new Promise(
+resolve=&gt;{
+funName(socode,callback(params)=&gt;{
+doSomeThingWithParams;
+return resovle(result);
+})
+})
+}
+mainFn = async function(){
+var r = await fn();
+}</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Raygift</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-06-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nodejs/">NodeJS</a>
+          <a href="/tags/javascript/">JavaScript</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020-07-04-first-chrome-extension/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">chrome扩展程序入门实践</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020-04-06-read-tidb-optimize/">
+            <span class="next-text nav-default">解决tidb有关执行计划的一个简单入门issue</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:bgtickt@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/raygift" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/6501440811" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Raygift</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

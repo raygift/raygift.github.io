@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>向Github开源项目提交PR，总共分几步？ - Raygift&#39;s Notes - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Raygift" /><meta name="description" content="总结一下如何开始向Github开源项目提交PR，以及如何为TiDB贡献源码" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.94.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/2021-04-08-how-to-contribute-to-opensource/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b874a8796a492f0d7c86bb24c33cbf052935783a5778ebaf819a8e514bf49f10.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="向Github开源项目提交PR，总共分几步？"/>
+<meta name="twitter:description" content="总结一下如何开始向Github开源项目提交PR，以及如何为TiDB贡献源码"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Raygift 学习笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Raygift 学习笔记</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">向Github开源项目提交PR，总共分几步？</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-04-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"> 软件使用笔记 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#通用步骤">通用步骤</a>
+      <ul>
+        <li><a href="#1-fork开源项目">1. fork开源项目</a></li>
+        <li><a href="#2-将fork-的代码获取到个人开发终端本地">2. 将fork 的代码获取到个人开发终端本地</a></li>
+        <li><a href="#3-保持本地代码与原仓库代码一致">3. 保持本地代码与原仓库代码一致</a></li>
+        <li><a href="#4-本地完成代码开发">4. 本地完成代码开发</a></li>
+        <li><a href="#5-创建pull-request">5. 创建pull request</a></li>
+      </ul>
+    </li>
+    <li><a href="#tidb-专用步骤">TiDB 专用步骤</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#--需要首先签署cla">- 需要首先签署CLA</a></li>
+            <li><a href="#--代码注释以及评论风格上需要遵守几点">- 代码、注释以及评论风格上需要遵守几点：</a></li>
+            <li><a href="#--自动化测试">- 自动化测试</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>主要参考<a href="https://pingcap.com/blog-cn/how-to-contribute/#%E5%A6%82%E4%BD%95%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%8F%82%E4%B8%8E%E5%A4%A7%E5%9E%8B%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE">如何从零开始参与大型开源项目</a></p>
+<h1 id="通用步骤">通用步骤</h1>
+<h2 id="1-fork开源项目">1. fork开源项目</h2>
+<ol>
+<li>打开Github，找到开源项目主页，点击右上角“Fork”</li>
+<li>经过数秒的loading后即可完成，页面跳转到forked 之后自己的仓库里</li>
+</ol>
+<h2 id="2-将fork-的代码获取到个人开发终端本地">2. 将fork 的代码获取到个人开发终端本地</h2>
+<ol>
+<li>进入计划存放代码的上级目录，执行如下git clone 命令，命令会自动新建一个项目对应的文件夹</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone git@github.com:raygift/awesome-database-learning.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		clone 到本地的代码默认在master 分支，且自动将个人github上的仓库作为origin</p>
+<p><img src="https://rayalioss.oss-cn-shanghai.aliyuncs.com/img/image-20210406163357659.png" alt="image-20210406163357659"></p>
+<h2 id="3-保持本地代码与原仓库代码一致">3. 保持本地代码与原仓库代码一致</h2>
+<p><em>参考<a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork">这里</a></em></p>
+<p>为了保持与原项目仓库的一致，将原仓库设为本地代码的upstream</p>
+<p>活跃开源项目的源代码会一直在更新，fork或clone来的仓库一旦放置不管就会很快离最新源码越来越远，为了让仓库保持最新状态，需要：</p>
+<p>​		1. 将原仓库作为远程仓库，并设置名称，一般名称设为“upstream”</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git remote add upstream git@github.com:pingcap/awesome-database-learning.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://rayalioss.oss-cn-shanghai.aliyuncs.com/img/image-20210406164817414.png" alt="image-20210406164817414"></p>
+<p>​		2. 获取最新代码，并与本地分支进行合并</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git fetch upstream
+</span></span><span class="line"><span class="cl">git merge upstream/master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		3. 将原仓库最新代码更新到自己的远程仓库</p>
+<p>完成本地代码的更新后，可以将代码push到自己的远程仓库origin，使得fork 的代码保持最新状态</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-本地完成代码开发">4. 本地完成代码开发</h2>
+<p>根据目标完成源码修改，一般目标为一个特定的issue，代码的修改一般使用单独一个分支进行开发</p>
+<ol>
+<li>创建特定工作分支</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git checkout -b workBranch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git branch workBranch2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://rayalioss.oss-cn-shanghai.aliyuncs.com/img/image-20210406170208461.png" alt="image-20210406170208461"></p>
+<p><img src="https://rayalioss.oss-cn-shanghai.aliyuncs.com/img/image-20210406170143012.png" alt="image-20210406170143012"></p>
+<ol start="2">
+<li>完成代码开发，并提交到本地仓库</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m &#34;modify desc&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>创建对应的远程工作分支，并完成代码推送</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git push origin workBranch
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>本步骤中还可使用如下命令，将本地工作分支与远程分支关联起来，后续对此分支再次提交时就无需指定仓库和分支名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> git push --set-upstream origin workBranch 
+</span></span><span class="line"><span class="cl"> ....
+</span></span><span class="line"><span class="cl"> git push
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>&ndash;set-upstream 还可以缩写为 -u</em>，使用如下命令查看本地分支与远程分支对应关系</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git branch -vv
+</span></span><span class="line"><span class="cl">  master     eb7ae54 [origin/master] Add a learned index Paper (#36)
+</span></span><span class="line"><span class="cl">* workBranch 93904a7 [origin/workBranch] modify 2 desc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-创建pull-request">5. 创建pull request</h2>
+<ol>
+<li>打开Github 个人仓库页面，会有工作分支push记录，以及“ Compare &amp; pull request ”的提醒</li>
+</ol>
+<p><img src="https://rayalioss.oss-cn-shanghai.aliyuncs.com/img/image-20210406173356540.png" alt="image-20210406173356540"></p>
+<ol start="2">
+<li>点击“ Compare &amp; pull request ”进入“Open a pull request”，填写PR描述后点击“Create pull request”完成创建。</li>
+</ol>
+<p><img src="https://rayalioss.oss-cn-shanghai.aliyuncs.com/img/image-20210406173623949.png" alt="image-20210406173623949"></p>
+<ol start="3">
+<li>pr被接受后，自己远程仓库的工作分支可删除，本地工作分支也可删除</li>
+</ol>
+<h1 id="tidb-专用步骤">TiDB 专用步骤</h1>
+<p>在向TiDB 贡献代码时，还需要参考<a href="https://github.com/pingcap/community/blob/master/contributors/README.md">这篇官方指引(how to contribute)</a>，可以重点关注以下内容：</p>
+<h3 id="--需要首先签署cla">- 需要首先签署CLA</h3>
+<p>TiDB 要求社区代码贡献者在贡献代码前先签署CLA协议</p>
+<blockquote>
+<p>CLA 是 Contributor License Agreement 的缩写，CLA 可以看做是对开源软件本身采用的开源协议的补充。一般分为公司级和个人级别的 CLA，所谓公司级即某公司代表签署 CLA 后即可代表该公司所有员工都签署了该 CLA，而个人级别 CLA 只代表个人认可该 CLA。</p>
+<p>因为 CLA 是每个公司或组织自定义的，在细节上可能稍有不同，不过都会重点包含这些内容：1. 授予著作权给拥有该软件知识产权的公司或组织；2. 专利许可的授予；3. 签署者保证依法有权授予上述许可；</p>
+</blockquote>
+<p>TiDB 自定义的CLA 的具体内容见<a href="https://cla-assistant.io/pingcap/tidb?pullRequest=16303">这里</a>，节选一些重点内容如下：</p>
+<blockquote>
+<p>This license is for your protection as a contributor as well as the protection of PingCAP and its other contributors and users; it does not change your rights to use your own Contributions for any other purpose.</p>
+<p>这个许可是为了保护贡献者以及PingCAP，以及其他贡献者和用户；本许可并不改变你以其他目的使用自己所贡献代码的权利。</p>
+<p>Grant of Copyright License. Subject to the terms and conditions of this CLA, You hereby grant to PingCAP and to recipients of software distributed by PingCAP a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare derivative works of, publicly display, publicly perform, sublicense, and distribute Your Contributions and such derivative works.</p>
+<p>版权许可的授权。遵守本CLA协议的条款，在此你授权PingCAP 及PingCAP 软件分发的接收者 永久的，全球范围的，非独家的，免费的，免除专利使用费，不可撤回的版权（复制）许可，准备公开展示，公开演播，再授权，分发你的“Contributions”的衍生工作，以及衍生作品。</p>
+<p>Grant of Patent License. Subject to the terms and conditions of this CLA, You hereby grant to PingCAP and to recipients of software distributed by PingCAP a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by You that are necessarily infringed by Your Contribution(s) alone or by combination of Your Contribution(s) with the Work to which such Contribution(s) were submitted. If any entity institutes patent litigation against You or any other entity (including a cross-claim or counterclaim in a lawsuit) alleging that Your Contribution, or the Work to which You have contributed, constitutes direct or contributory patent infringement, then any patent licenses granted to that entity under this CLA for that Contribution or Work shall terminate as of the date such litigation is filed.</p>
+<p>专利许可的授权。遵守本CLA协议的条款，在此你授权PingCAP 及PingCAP 软件分发的接收者永久的，全球范围的，非独家的，免费的，免除专利使用费，不可撤回的（除了本章提到的情况外）专利（申请）许可，已经制造，使用，要约销售，销售，导入，以及其他Work的转移，此许可只应用于那些你宣称可获得许可的专利，这类专利是不可避免的被你的“Contribution(s)”独立所破坏，或者被你提交的&quot;Contribution(s)&ldquo;组合所破坏。如果任何实体实行针对你的专利诉讼，或者任何其他实体（包括交叉诉讼或反诉）宣称你的Contribution或者你贡献的Work，直接构成或促成了专利诉讼，那么已授权的本CLA协议下针对这些Contribution和Work 的任何专利许可将于诉讼提出时随即终止</p>
+</blockquote>
+<h3 id="--代码注释以及评论风格上需要遵守几点">- 代码、注释以及评论风格上需要遵守几点：</h3>
+<ol>
+<li>创建issue的描述规范</li>
+<li>创建工作分支的命名规范（github的username/代码的module名）</li>
+<li>新建pr申请的描述规范（根据创建pr时的注释填写）</li>
+</ol>
+<h3 id="--自动化测试">- 自动化测试</h3>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Raygift</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-04-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/github/">github</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2021-04-13-how-to-compile-and-debug-mysql-source-code-on-macos-using-vscode/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020-07-04-first-chrome-extension/">
+            <span class="next-text nav-default">chrome扩展程序入门实践</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:bgtickt@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/raygift" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/6501440811" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Raygift</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

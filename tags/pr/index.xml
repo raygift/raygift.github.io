@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PR on Raygift&#39;s Notes - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/pr/</link>
+    <description>Recent content in PR on Raygift&#39;s Notes - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 06 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/pr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>解决tidb有关执行计划的一个简单入门issue</title>
+      <link>http://localhost:1313/post/2020-04-06-read-tidb-optimize/</link>
+      <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2020-04-06-read-tidb-optimize/</guid>
+      <description>整体过程 学会提交pr fork+clone代码，进行代码分析 修改代码进行调试验证 提交代码，发起pr 代码分析 本issue目的是将&amp;quot;Th</description>
+    </item>
+    
+  </channel>
+</rss>

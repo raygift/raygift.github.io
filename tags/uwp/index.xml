@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UWP on Raygift&#39;s Notes - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/uwp/</link>
+    <description>Recent content in UWP on Raygift&#39;s Notes - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 10 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/uwp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UWP ComboBox 取值问题</title>
+      <link>http://localhost:1313/post/2017-05-10-uwp-combobox-seleteditem/</link>
+      <pubDate>Wed, 10 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2017-05-10-uwp-combobox-seleteditem/</guid>
+      <description>之前通过Jekyll与Github搭建了自己的博客，并试着发了几篇，需要去markdown文件中手动修改一些格式和文字，感觉通过直接本地修改</description>
+    </item>
+    
+  </channel>
+</rss>

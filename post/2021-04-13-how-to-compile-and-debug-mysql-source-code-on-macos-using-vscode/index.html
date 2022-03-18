@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码 - Raygift&#39;s Notes - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Raygift" /><meta name="description" content="总结一下如何在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.94.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/2021-04-13-how-to-compile-and-debug-mysql-source-code-on-macos-using-vscode/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b874a8796a492f0d7c86bb24c33cbf052935783a5778ebaf819a8e514bf49f10.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码"/>
+<meta name="twitter:description" content="总结一下如何在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Raygift 学习笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Raygift 学习笔记</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-04-13 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"> 软件使用笔记 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#在macos从源码编译安装mysql并使用vscode-调试mysql-源码">在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码</a>
+      <ul>
+        <li><a href="#编译安装">编译安装</a>
+          <ul>
+            <li><a href="#设置的prefix-未生效">设置的prefix 未生效</a></li>
+          </ul>
+        </li>
+        <li><a href="#vscode-运行调试">vscode 运行调试</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="在macos从源码编译安装mysql并使用vscode-调试mysql-源码">在MacOS从源码编译安装MySQL，并使用vscode 调试MySQL 源码</h1>
+<p>操作系统：MacOS 11.2.2</p>
+<p>MySQL源码版本：5.6.47</p>
+<p>VS Code 版本：March 2021 (version 1.55)</p>
+<h2 id="编译安装">编译安装</h2>
+<ol>
+<li>下载mysql 源码：https://cdn.mysql.com//archives/mysql-5.6/mysql-5.6.47.tar.gz</li>
+<li>安装cmake 3.20.1，并设置cmake 命令行命令</li>
+<li>在mysql 源码根目录执行编译变量配置</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">BUILD/compile-pentium-debug --prefix=$HOME/mysql-bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>在mysql 源码根目录执行编译</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">make &amp;&amp; make install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="设置的prefix-未生效">设置的prefix 未生效</h3>
+<p>发现4.中指定安装目录为$HOME/mysql-bin 并没有生效，导致第5. 执行时仍然安装到了/usr/local/mysql ，且安装由于目录权限问题失败。</p>
+<p>原本安装了mysql 8.0 到默认的/usr/local/mysql 路径，而mysql 5.6.47的部分文件已经替换了mysql 8.0 的文件</p>
+<p>尝试卸载已有安装，并清理相关目录，参考https://blog.csdn.net/qq_40177015/article/details/111599464</p>
+<ol start="6">
+<li>直接使用cmake而非BUILD 中的脚本，再次配置参数</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cmake -DCMAKE_INSTALL_PREFIX=/Users/zpc/mysql5-6-47/mysql -DMYSQL_DATADIR=/Users/zpc/mysql5-6-47/mysql/data -DSYSCONFDIR=/Users/zpc/mysql5-6-47/etc -DMYSQL_USER=mysql -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_BOOST=boost
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>
+<p>执行编译安装 make &amp;&amp; make install</p>
+</li>
+<li>
+<p>安装完成，创建 my.cnf 配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd /Users/zpc/mysql5-6-47/mysql
+</span></span><span class="line"><span class="cl">cp support-files/my-default.cnf /Users/zpc/mysql5-6-47/etc/my.cnf
+</span></span><span class="line"><span class="cl">chown mysql:mysql /etc/my.cnf
+</span></span><span class="line"><span class="cl">vi /Users/zpc/mysql5-6-47/etc/my.cnf
+</span></span><span class="line"><span class="cl">[mysqld]
+</span></span><span class="line"><span class="cl">    basedir=/Users/zpc/mysql5-6-47/mysql
+</span></span><span class="line"><span class="cl">    datadir=/Users/zpc/mysql5-6-47/mysql/data
+</span></span><span class="line"><span class="cl">    #bind-address=0.0.0.0
+</span></span><span class="line"><span class="cl">    port=3306
+</span></span><span class="line"><span class="cl">    socket=/tmp/mysql.sock
+</span></span><span class="line"><span class="cl">    innodb_file_per_table=1
+</span></span><span class="line"><span class="cl">    default-storage-engine=INNODB
+</span></span><span class="line"><span class="cl">    explicit_defaults_for_timestamp=true
+</span></span><span class="line"><span class="cl">    symbolic-links=0
+</span></span><span class="line"><span class="cl">    max_connections=1000
+</span></span><span class="line"><span class="cl">    log-error=/Users/zpc/mysql5-6-47/mysql/mysql.log
+</span></span><span class="line"><span class="cl">    pid-file=/Users/zpc/mysql5-6-47/mysql/mysql.pid
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="9">
+<li>初始化mysql 数据库与配置</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo -u mysql vim ./scripts/mysql_install_db # 修改.mysql_secret 保存目录
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./scripts/mysql_install_db --user=mysql --basedir=/Users/zpc/mysql5-6-47/mysql --datadir=/Users/zpc/mysql5-6-47/mysql/data --defaults-file=/Users/zpc/mysql5-6-47/etc/my.cnf --random-passwords
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">A RANDOM PASSWORD HAS BEEN SET FOR THE MySQL root USER !
+</span></span><span class="line"><span class="cl">You will find that password in &#39;/Users/zpc/mysql5-6-47/.mysql_secret&#39;.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo -u mysql cat /Users/zpc/mysql5-6-47/.mysql_secret   # 查看随机密码
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># The random password set for the root user at Tue Apr 13 17:52:47 2021 (local time): bXDTcTKo_vP3J5kc
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>启动mysql 服务</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo -u mysql ./etc/init.d/mysqld start
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Starting MySQL
+</span></span><span class="line"><span class="cl">.. SUCCESS!
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="11">
+<li>连接MySQL</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo -u mysql cat /Users/zpc/mysql5-6-47/.mysql_secret   # 查看随机密码
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># The random password set for the root user at Tue Apr 13 17:52:47 2021 (local time): bXDTcTKo_vP3J5kc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/usr/local/mysql80/bin/mysql -uroot -pbXDTcTKo_vP3J5kc
+</span></span><span class="line"><span class="cl">mysql&gt; select user,host from mysql.user;
+</span></span><span class="line"><span class="cl">ERROR 1820 (HY000): You must SET PASSWORD before executing this statement
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="12">
+<li>设置root 用户密码</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PASSWORD</span><span class="p">(</span><span class="s1">&#39;123456&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="vscode-运行调试">vscode 运行调试</h2>
+<p>前提条件：完成源码的编译，并运行成功</p>
+<ol>
+<li>
+<p>vscode 配置C++ 开发环境：</p>
+<ol>
+<li>安装插件：C/C++、C/C++ Clang Command Adapter、CodeLLDB、Code Runner</li>
+<li>打开mysql源码文件，配置c_cpp_properties.json、launch.json、tasks.json</li>
+</ol>
+</li>
+<li>
+<p>使用vscode 打开mysql 源码</p>
+</li>
+<li>
+<p>command+shift+p，添加launch.json 配置，主要填写program及args，program为之前根据源码编译好的mysqld运行文件地址，args 为之前修改好的默认的mysql 运行文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">        &#34;program&#34;: &#34;/Users/zpc/mysql5-6-47/mysql/bin/mysqld&#34;, 
+</span></span><span class="line"><span class="cl">        &#34;args&#34;: [&#34;--defaults-file=/Users/zpc/mysql5-6-47/etc/my.cnf&#34;],
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>在vscode 的调试RUN AND DEBUG 页面，使用2. 中添加的调试配置启动</p>
+</li>
+<li>
+<p>若遇到权限问题，将mysql 编译安装的目录权限改为777</p>
+</li>
+</ol>
+<p>参考：</p>
+<ol>
+<li><a href="https://segmentfault.com/a/1190000021140392">https://segmentfault.com/a/1190000021140392</a></li>
+<li><a href="https://blog.csdn.net/qq_40177015/article/details/111599464">https://blog.csdn.net/qq_40177015/article/details/111599464</a></li>
+<li><a href="https://blog.csdn.net/freedompuge/article/details/45335683">https://blog.csdn.net/freedompuge/article/details/45335683</a></li>
+<li><a href="https://blog.csdn.net/sunhf_csdn/article/details/80229492">https://blog.csdn.net/sunhf_csdn/article/details/80229492</a></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Raygift</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-04-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/macos/">MacOS</a>
+          <a href="/tags/mysql/">MySQL</a>
+          <a href="/tags/vs-code/">VS Code</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/first-hugo-page/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">使用Hugo 更新Github Pages</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2021-04-08-how-to-contribute-to-opensource/">
+            <span class="next-text nav-default">向Github开源项目提交PR，总共分几步？</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:bgtickt@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/raygift" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/u/6501440811" class="iconfont icon-weibo" title="weibo"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Raygift</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,7 +6,16 @@
     <description>Recent content in Jekyll on Raygift&#39;s Notes - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 06 Apr 2017 00:00:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/jekyll/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/jekyll/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Page build failure with no details from Github page</title>
+      <link>http://localhost:1313/post/2017-05-12-github-page-page-build-failure/</link>
+      <pubDate>Fri, 12 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/2017-05-12-github-page-page-build-failure/</guid>
+      <description>问题描述 在Github Page 上搭建的博客，上传markdown格式的blog文件后，发现博客列表中找不到该文章，且收到一封GitHub发来的Em</description>
+    </item>
+    
     <item>
       <title>在github使用Jekyll搭建blog</title>
       <link>http://localhost:1313/post/2017-04-06-create-blog-on-github-using-jekyll/</link>
