@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Raygift&#39;s Notes - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Raygift&#39;s Notes - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 18 Mar 2022 11:22:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Hugo 更新Github Pages</title>
+      <link>http://localhost:1313/post/first-hugo-page/</link>
+      <pubDate>Fri, 18 Mar 2022 11:22:48 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/first-hugo-page/</guid>
+      <description>使用Hugo 重新搭建博客，之后希望用博客分享一些日常学习的笔记和总结；另外同步一些个人微博内容，作为归档备份，避免被夹时丢失所有过往动态。</description>
+    </item>
+    
+    <item>
+      <title>在github使用Jekyll搭建blog</title>
+      <link>http://localhost:1313/post/2017-04-06-create-blog-on-github-using-jekyll/</link>
+      <pubDate>Thu, 06 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/2017-04-06-create-blog-on-github-using-jekyll/</guid>
+      <description>整体过程 安装ruby github上新建一个repository, repository name 格式为 {github用户名}+“.io” clone一个jekyll模板，</description>
+    </item>
+    
+  </channel>
+</rss>
